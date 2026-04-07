@@ -1,11 +1,11 @@
 {
   "name": "@isonnymichael/bedrock",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Instruction-driven system initialization for AI Coding Assistants",
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "bedrock": "./bin/bedrock.cjs"
+    "bedrock": "bin/bedrock.cjs"
   },
   "scripts": {
     "init": "node ./bin/bedrock.js init"
