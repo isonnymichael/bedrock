@@ -28,9 +28,7 @@ export async function generateAntigravity(context) {
   return `
 ### Antigravity (Gemini)
 📚 **Official Documentation:**
-- Rules & GEMINI.md: https://antigravity.google/docs/customize/rules
-- Workflows: https://antigravity.google/docs/customize/workflows
-- Skills: https://antigravity.google/docs/customize/skills
+- Rules & GEMINI.md: https://antigravity.codes/blog/antigravity-rules-examples
 
 Refer to the documentation above for the correct file format, structure, and best practices. Generate the following configuration files for Antigravity. Each file must be comprehensive, production-grade, and tailored to the project context below.
 

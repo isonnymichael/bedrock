@@ -26,9 +26,7 @@ export async function generateCursor(context) {
   return `
 ### Cursor
 📚 **Official Documentation:**
-- Rules for AI: https://docs.cursor.com/context/rules
-- .cursorrules Reference: https://docs.cursor.com/context/rules#project-rules
-- Context & Settings: https://docs.cursor.com/context
+- Rules for AI: https://cursor.com/docs/rules
 
 Refer to the documentation above for the correct .mdc file format, YAML frontmatter structure, and best practices. Generate the following configuration files for Cursor IDE. Each \`.mdc\` file must include proper YAML frontmatter with \`description\`, \`globs\`, and \`alwaysApply\` fields. Each file must be comprehensive, production-grade, and tailored to the project context below.
 
@@ -37,7 +35,7 @@ ${intro}
 
 ---
 
-#### 1. \`.cursor/rules/project.mdc\` (Master Project Guide)
+#### 1. \`.cursor/AGENTS.md\` (Master Project Guide)
 This is the primary project configuration file. Set \`alwaysApply: true\`.
 Generate it with the following sections:
 - **Project Overview**: A concise 2-3 line summary of the project's purpose, goals, and target audience.
