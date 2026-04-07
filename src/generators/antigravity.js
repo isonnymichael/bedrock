@@ -23,7 +23,7 @@ ${intro}
 
 ---
 
-#### 1. \`GEMINI.md\` (Root — Master Guide)
+#### 1. \`.agents/GEMINI.md\` (Root — Master Guide)
 This is the primary instruction file loaded at the start of every Antigravity session. Generate it with the following sections:
 - **Project Overview**: A concise 2-3 line summary of the project's purpose, goals, and target audience.
 - **Tech Stack**: Explicitly list all languages, frameworks, runtimes, package managers, and key libraries with version constraints (e.g., "Node.js 20+", "Vue 3 with TypeScript 5.x").

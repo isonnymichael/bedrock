@@ -23,7 +23,7 @@ ${intro}
 
 ---
 
-#### 1. \`CLAUDE.md\` (Root — Master Guide)
+#### 1. \`.claude/CLAUDE.md\` (Root — Master Guide)
 This is the most critical file. It is loaded at the start of every Claude Code session. Generate it with the following sections:
 - **Project Overview**: A concise 2-3 line summary of what the project does, its purpose, and target audience.
 - **Tech Stack**: Explicitly list all languages, frameworks, runtimes, package managers, and key libraries. Be specific (e.g., "Node.js 20+", "React 18 with TypeScript 5.x").

@@ -23,7 +23,7 @@ ${intro}
 
 ---
 
-#### 1. \`AGENTS.md\` (Root — Master Guide)
+#### 1. \`.trae/AGENTS.md\` (Root — Master Guide)
 This is the primary behavioral guidance file loaded by Trae agents. Generate it with the following sections:
 - **Project Overview**: A concise 2-3 line summary of the project's purpose, goals, and target audience.
 - **Tech Stack**: Explicitly list all languages, frameworks, runtimes, package managers, and key libraries with version constraints (e.g., "Node.js 20+", "React 18 with TypeScript 5.x").
