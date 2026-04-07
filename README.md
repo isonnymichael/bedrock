@@ -54,16 +54,16 @@
 
 **Step 1 — Open your AI Agent chat.**
 
-**Step 2 — Paste a prompt telling the agent to run Bedrock and execute the results:**
+**Step 2 — Paste a prompt telling the agent to run Bedrock` and execute the results:**
 
 ```
-Run npx @isonnymichael/bedrock init --tool <tool> and execute the results
+Run `npx @isonnymichael/bedrock init --tool <tool>` and execute the results
 ```
 
 Or with a project description:
 
 ```
-Run npx @isonnymichael/bedrock init --tool <tool> --about "<description>" and execute the results
+Run `npx @isonnymichael/bedrock init --tool <tool> --about "<description>"` and execute the results
 ```
 
 **Step 3 — The agent runs the command, reads the generated instructions, and writes all config files into your project.**
@@ -88,17 +88,17 @@ If `--tool` is missing or invalid, Bedrock prints an error with the correct usag
 Open Claude Code agent chat and type:
 
 ```
-Run npx @isonnymichael/bedrock init --tool claude and execute the results
+Run `npx @isonnymichael/bedrock init --tool claude` and execute the results
 ```
 
 With a project description:
 
 ```
-Run npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT." and execute the results
+Run `npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT."` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm." and execute the results
+Run `npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm."` and execute the results
 ```
 
 #### Antigravity (Gemini)
@@ -106,17 +106,17 @@ Run npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with 
 Open Antigravity agent chat and type:
 
 ```
-Run npx @isonnymichael/bedrock init --tool antigravity and execute the results
+Run `npx @isonnymichael/bedrock init --tool antigravity` and execute the results
 ```
 
 With a project description:
 
 ```
-Run npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching." and execute the results
+Run `npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching."` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse." and execute the results
+Run `npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse."` and execute the results
 ```
 
 #### Trae
@@ -124,17 +124,17 @@ Run npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 da
 Open Trae agent chat and type:
 
 ```
-Run npx @isonnymichael/bedrock init --tool trae and execute the results
+Run `npx @isonnymichael/bedrock init --tool trae` and execute the results
 ```
 
 With a project description:
 
 ```
-Run npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev." and execute the results
+Run `npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev."` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server." and execute the results
+Run `npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server."` and execute the results
 ```
 
 #### Cursor
@@ -142,13 +142,13 @@ Run npx @isonnymichael/bedrock init --tool trae --about "A React Native app with
 Open Cursor agent chat and type:
 
 ```
-Run npx @isonnymichael/bedrock init --tool cursor and execute the results
+Run `npx @isonnymichael/bedrock init --tool cursor` and execute the results
 ```
 
 With a project description:
 
 ```
-Run npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications." and execute the results
+Run `npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications."` and execute the results
 ```
 
 ---
@@ -187,13 +187,13 @@ When your project evolves — new libraries, new services, new architecture — 
 Open your AI agent chat and type:
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool <tool> and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool <tool>` and execute the results
 ```
 
 Or describe what changed:
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool <tool> --about "<what-changed>" and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool <tool> --about "<what-changed>"` and execute the results
 ```
 
 **Options:**
@@ -210,25 +210,25 @@ If no existing configuration is found for the given tool, Bedrock will tell you 
 Let the AI infer what changed:
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool trae and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool trae` and execute the results
 ```
 
 Describe what changed explicitly:
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL" and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL"` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API" and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API"` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5" and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"` and execute the results
 ```
 
 ```
-Run npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines" and execute the results
+Run `npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"` and execute the results
 ```
 
 ### What the AI will do
