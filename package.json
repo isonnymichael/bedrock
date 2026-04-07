@@ -1,0 +1,27 @@
+{
+  "name": "bedrock",
+  "version": "0.0.1",
+  "description": "Instruction-driven system for AI",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "bedrock": "./bin/bedrock.js"
+  },
+  "scripts": {
+    "start": "node ./bin/bedrock.js",
+    "test": "node ./bin/bedrock.js init"
+  },
+  "keywords": [
+    "ai",
+    "cli",
+    "coder",
+    "assistant"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "kleur": "^4.1.5",
+    "prompts": "^2.4.2"
+  }
+}
