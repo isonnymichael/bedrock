@@ -16,8 +16,8 @@
     "coder",
     "assistant"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Sonny Michael",
+  "license": "GPL-3.0-only",
   "dependencies": {
     "commander": "^12.0.0",
     "kleur": "^4.1.5",
