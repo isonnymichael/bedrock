@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "bedrock": "bin/bedrock.js"
+    "bedrock": "./bin/bedrock.cjs"
   },
   "scripts": {
     "init": "node ./bin/bedrock.js init"
