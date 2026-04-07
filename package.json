@@ -1,6 +1,6 @@
 {
   "name": "@isonnymichael/bedrock",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Instruction-driven system initialization for AI Coding Assistants",
   "main": "src/index.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "bedrock": "bin/bedrock.cjs"
   },
   "scripts": {
-    "init": "node ./bin/bedrock.js init",
+    "init": "node ./bin/bedrock.cjs init",
     "release:npm": "npm publish --registry=https://registry.npmjs.org --@isonnymichael:registry=https://registry.npmjs.org",
     "release:github": "npm publish --registry=https://npm.pkg.github.com",
     "release": "npm run release:npm && npm run release:github"

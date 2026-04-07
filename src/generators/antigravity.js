@@ -7,7 +7,6 @@ export async function createAntigravityStructure() {
     '.agents',
     '.agents/rules',
     '.agents/workflows',
-    '.agents/skills/debug',
   ];
   for (const dir of dirs) {
     await createDir(path.join(cwd, dir));
@@ -105,12 +104,5 @@ Create a reusable workflow that provides a new developer (or agent) with:
 - Key files and entry points to understand first.
 - How to set up the local development environment step by step.
 - Common pitfalls and gotchas specific to this project.
-
-#### 9. \`.agents/skills/debug/SKILL.md\` (Debugging Skill)
-Create a debugging skill with YAML frontmatter (\`name\`, \`description\`) and instructions for:
-- Systematic debugging: reproduce → isolate → diagnose → fix → verify.
-- Reading stack traces and error logs effectively.
-- Using logging and breakpoints strategically.
-- Writing regression tests after fixing bugs.
 `;
 }

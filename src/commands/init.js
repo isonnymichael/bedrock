@@ -1,5 +1,6 @@
 import kleur from 'kleur';
-import { isProjectFresh, getProjectStructure } from '../utils/fs-helpers.js';
+import { isProjectFresh, getProjectStructure, createFile } from '../utils/fs-helpers.js';
+import path from 'path';
 
 // Import generators
 import { generateClaude, createClaudeStructure } from '../generators/claude.js';
@@ -76,8 +77,11 @@ export async function initCommand(options) {
   }
 
   finalPrompt += `\nUse your tools to write these files into the workspace now.`;
+  finalPrompt += `\nDelete BEDROCK.md file after you are done.`;
   finalPrompt += `\n======================================================\n`;
 
-  console.log(kleur.cyan(finalPrompt));
-  console.log(kleur.bgGreen().black(` ✨ Prompt generated for ${tool}. The AI should now take over. \n`));
+  const bedrockMdPath = path.join(process.cwd(), 'BEDROCK.md');
+  await createFile(bedrockMdPath, finalPrompt);
+  console.log(kleur.green(`✔ Prompt written to BEDROCK.md\n`));
+  console.log(kleur.bgGreen().black(` ✨ Prompt generated for ${tool}. Open BEDROCK.md and pass it to your AI agent. \n`));
 }

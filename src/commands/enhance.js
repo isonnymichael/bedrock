@@ -1,5 +1,6 @@
 import kleur from 'kleur';
-import { getProjectStructure } from '../utils/fs-helpers.js';
+import path from 'path';
+import { getProjectStructure, createFile } from '../utils/fs-helpers.js';
 import { hasExistingConfigs, readExistingConfigs, getConfigPath } from '../utils/config-reader.js';
 import { generateEnhance } from '../generators/enhance.js';
 
@@ -59,8 +60,11 @@ export async function enhanceCommand(options) {
   finalPrompt += `INSTRUCTIONS:\n`;
   finalPrompt += `The user has requested to enhance their existing AI configurations for ${tool}.\n`;
   finalPrompt += await generateEnhance(tool, context);
+  finalPrompt += `\nDelete BEDROCK.md file after you are done.`;
   finalPrompt += `\n======================================================\n`;
 
-  console.log(kleur.cyan(finalPrompt));
-  console.log(kleur.bgGreen().black(` ✨ Enhancement prompt generated for ${tool}. The AI should now take over. \n`));
+  const bedrockMdPath = path.join(process.cwd(), 'BEDROCK.md');
+  await createFile(bedrockMdPath, finalPrompt);
+  console.log(kleur.green(`✔ Prompt written to BEDROCK.md\n`));
+  console.log(kleur.bgGreen().black(` ✨ Enhancement prompt generated for ${tool}. Open BEDROCK.md and pass it to your AI agent. \n`));
 }
