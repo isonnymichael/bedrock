@@ -1,3 +1,18 @@
+import path from 'path';
+import { createDir } from '../utils/fs-helpers.js';
+
+export async function createTraeStructure() {
+  const cwd = process.cwd();
+  const dirs = [
+    '.trae',
+    '.trae/rules',
+    '.trae/prompts',
+  ];
+  for (const dir of dirs) {
+    await createDir(path.join(cwd, dir));
+  }
+}
+
 export async function generateTrae(context) {
   let intro;
   if (context.isFresh) {

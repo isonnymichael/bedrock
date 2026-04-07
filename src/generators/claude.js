@@ -1,3 +1,19 @@
+import path from 'path';
+import { createDir } from '../utils/fs-helpers.js';
+
+export async function createClaudeStructure() {
+  const cwd = process.cwd();
+  const dirs = [
+    '.claude',
+    '.claude/rules',
+    '.claude/commands',
+    '.claude/skills',
+  ];
+  for (const dir of dirs) {
+    await createDir(path.join(cwd, dir));
+  }
+}
+
 export async function generateClaude(context) {
   let intro;
   if (context.isFresh) {

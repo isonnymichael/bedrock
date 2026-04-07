@@ -1,3 +1,19 @@
+import path from 'path';
+import { createDir } from '../utils/fs-helpers.js';
+
+export async function createAntigravityStructure() {
+  const cwd = process.cwd();
+  const dirs = [
+    '.agents',
+    '.agents/rules',
+    '.agents/workflows',
+    '.agents/skills/debug',
+  ];
+  for (const dir of dirs) {
+    await createDir(path.join(cwd, dir));
+  }
+}
+
 export async function generateAntigravity(context) {
   let intro;
   if (context.isFresh) {

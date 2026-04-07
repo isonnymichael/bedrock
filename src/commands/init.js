@@ -2,10 +2,10 @@ import kleur from 'kleur';
 import { isProjectFresh, getProjectStructure } from '../utils/fs-helpers.js';
 
 // Import generators
-import { generateClaude } from '../generators/claude.js';
-import { generateAntigravity } from '../generators/antigravity.js';
-import { generateTrae } from '../generators/trae.js';
-import { generateCursor } from '../generators/cursor.js';
+import { generateClaude, createClaudeStructure } from '../generators/claude.js';
+import { generateAntigravity, createAntigravityStructure } from '../generators/antigravity.js';
+import { generateTrae, createTraeStructure } from '../generators/trae.js';
+import { generateCursor, createCursorStructure } from '../generators/cursor.js';
 
 const VALID_TOOLS = ['claude', 'antigravity', 'trae', 'cursor'];
 
@@ -49,6 +49,17 @@ export async function initCommand(options) {
     projectAbout: options.about || '',
     projectStructure
   };
+
+  console.log(kleur.dim('Creating folder structure...'));
+  try {
+    if (tool === 'claude') await createClaudeStructure();
+    if (tool === 'antigravity') await createAntigravityStructure();
+    if (tool === 'trae') await createTraeStructure();
+    if (tool === 'cursor') await createCursorStructure();
+    console.log(kleur.green('✔ Folders created.\n'));
+  } catch (err) {
+    console.log(kleur.red(`❌ Failed creating folder structure: ${err.message}`));
+  }
 
   let finalPrompt = `\n======================================================\n`;
   finalPrompt += `INSTRUCTIONS:\n`;

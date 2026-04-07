@@ -1,6 +1,6 @@
 {
   "name": "@isonnymichael/bedrock",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Instruction-driven system initialization for AI Coding Assistants",
   "main": "src/index.js",
   "type": "module",

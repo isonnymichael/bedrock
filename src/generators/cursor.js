@@ -1,3 +1,17 @@
+import path from 'path';
+import { createDir } from '../utils/fs-helpers.js';
+
+export async function createCursorStructure() {
+  const cwd = process.cwd();
+  const dirs = [
+    '.cursor',
+    '.cursor/rules',
+  ];
+  for (const dir of dirs) {
+    await createDir(path.join(cwd, dir));
+  }
+}
+
 export async function generateCursor(context) {
   let intro;
   if (context.isFresh) {
