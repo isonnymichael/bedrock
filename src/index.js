@@ -16,6 +16,8 @@ export async function main() {
   program
     .command('init')
     .description('Initialize AI assistant configuration rules')
+    .option('-t, --tool <tool>', 'AI tool to configure (claude, antigravity, trae, cursor)')
+    .option('-a, --about <description>', 'Project description (skips interactive prompt)')
     .action(initCommand);
 
   await program.parseAsync(process.argv);

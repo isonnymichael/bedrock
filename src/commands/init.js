@@ -1,4 +1,3 @@
-import prompts from 'prompts';
 import kleur from 'kleur';
 import { isProjectFresh, getProjectStructure } from '../utils/fs-helpers.js';
 
@@ -8,25 +7,33 @@ import { generateAntigravity } from '../generators/antigravity.js';
 import { generateTrae } from '../generators/trae.js';
 import { generateCursor } from '../generators/cursor.js';
 
-export async function initCommand() {
+const VALID_TOOLS = ['claude', 'antigravity', 'trae', 'cursor'];
+
+function showUsageError(message) {
+  console.log(kleur.red(`\n✖ Error: ${message}\n`));
+  console.log(kleur.white('Usage:'));
+  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool <tool> [--about <description>]\n'));
+  console.log(kleur.white('Options:'));
+  console.log(kleur.cyan('  -t, --tool <tool>          ') + kleur.dim(`Required. AI tool to configure. Choices: ${VALID_TOOLS.join(', ')}`));
+  console.log(kleur.cyan('  -a, --about <description>  ') + kleur.dim('Optional. Project description (AI will auto-detect if omitted)\n'));
+  console.log(kleur.white('Examples:'));
+  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool antigravity'));
+  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool claude --about "A REST API built with Node.js"\n'));
+  process.exit(1);
+}
+
+export async function initCommand(options) {
   console.log(kleur.bgBlue().white(' 🚀 Welcome to Bedrock AI ! \n'));
   console.log(kleur.dim('This tool generates prompt instructions for your AI agent to build out your configurations.\n'));
 
-  const aiSelection = await prompts({
-    type: 'select',
-    name: 'tool',
-    message: 'What AI Tool do you use?',
-    choices: [
-      { title: 'Claude Code', value: 'claude' },
-      { title: 'Antigravity (Gemini)', value: 'antigravity' },
-      { title: 'Trae', value: 'trae' },
-      { title: 'Cursor', value: 'cursor' }
-    ]
-  });
+  const tool = options.tool;
 
-  if (!aiSelection.tool) {
-    console.log(kleur.red('No tool selected. Exiting...'));
-    process.exit(0);
+  if (!tool) {
+    showUsageError('--tool <tool> is required.');
+  }
+
+  if (!VALID_TOOLS.includes(tool)) {
+    showUsageError(`"${tool}" is not a valid tool. Choose from: ${VALID_TOOLS.join(', ')}`);
   }
 
   const isFresh = await isProjectFresh();
@@ -37,18 +44,9 @@ export async function initCommand() {
     projectStructure = await getProjectStructure();
   }
 
-  const response = await prompts({
-    type: 'text',
-    name: 'about',
-    message: 'Describe your project (leave blank if the project exist, AI will auto generate for you):',
-    validate: value => (isFresh && !value.trim()) ? 'Please provide a description for your new project so the AI knows what to do.' : true
-  });
-
-  const projectAbout = response.about || '';
-
   const context = {
     isFresh,
-    projectAbout,
+    projectAbout: options.about || '',
     projectStructure
   };
 
@@ -57,7 +55,6 @@ export async function initCommand() {
   finalPrompt += `The user has requested to initialize AI Configurations, Project Specifications, Workflows, Guardrails, and Rules for their project.\n`;
   finalPrompt += `Please autonomously create the following folders and files with intelligently generated boilerplate rules according to the context provided:\n`;
 
-  const tool = aiSelection.tool;
   try {
     if (tool === 'claude') finalPrompt += await generateClaude(context);
     if (tool === 'antigravity') finalPrompt += await generateAntigravity(context);
@@ -70,7 +67,6 @@ export async function initCommand() {
   finalPrompt += `\nUse your tools to write these files into the workspace now.`;
   finalPrompt += `\n======================================================\n`;
 
-  // Output the final prompt to the terminal so the reading AI executes it
   console.log(kleur.cyan(finalPrompt));
   console.log(kleur.bgGreen().black(` ✨ Prompt generated for ${tool}. The AI should now take over. \n`));
 }

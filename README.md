@@ -19,6 +19,7 @@
   <a href="#-getting-started">Getting Started</a> •
   <a href="#-usage">Usage</a> •
   <a href="#-supported-ai-tools">Supported Tools</a> •
+  <a href="#-tips">Tips</a> •
   <a href="#-development">Development</a>
 </p>
 
@@ -44,31 +45,117 @@
 
 ## 📖 Usage
 
-Open your AI Coding Assistant and give it the following prompt:
+Prompt your AI agent to run the following command. The `--tool` flag is **required**; `--about` is optional (Bedrock will auto-detect your project structure if omitted).
 
 ```bash
-run npx @isonnymichael/bedrock init
+npx @isonnymichael/bedrock init --tool <tool> [--about "<description>"]
 ```
 
-### Interactive Flow
+**Options:**
 
-1. **Select your AI tool** — Choose from Claude Code, Antigravity (Gemini), Trae, or Cursor
-2. **Project detection** — Bedrock auto-detects whether your project is new or existing
-   - **New project**: You'll be prompted to describe your project
-   - **Existing project**: Bedrock scans your directory structure automatically
-3. **Prompt generation** — A detailed, structured prompt is printed to your terminal
-4. **AI takeover** — Paste the prompt into your AI assistant and let it create all the config files
+| Flag | Required | Description |
+|------|----------|-------------|
+| `-t, --tool <tool>` | Yes | AI tool to configure. Choices: `claude`, `antigravity`, `trae`, `cursor` |
+| `-a, --about <description>` | No | Project description. If omitted, Bedrock auto-detects the existing project structure |
+
+If `--tool` is missing or invalid, Bedrock prints an error with the correct usage and exits.
+
+---
+
+### Examples
+
+#### Claude Code
+
+```bash
+# Existing project — auto-detects structure
+npx @isonnymichael/bedrock init --tool claude
+
+# New SaaS backend
+npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT."
+
+# Monorepo
+npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm."
+```
+
+#### Antigravity (Gemini)
+
+```bash
+# Existing project — auto-detects structure
+npx @isonnymichael/bedrock init --tool antigravity
+
+# New mobile app
+npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching."
+
+# Data pipeline
+npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse."
+```
+
+#### Trae
+
+```bash
+# Existing project — auto-detects structure
+npx @isonnymichael/bedrock init --tool trae
+
+# Fullstack web app
+npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev."
+
+# E-commerce platform
+npx @isonnymichael/bedrock init --tool trae --about "An e-commerce platform built with Next.js 14 App Router, Tailwind CSS, and Shopify Storefront API. Supports server components, ISR, and edge functions."
+
+# CLI tool
+npx @isonnymichael/bedrock init --tool trae --about "A Node.js CLI tool published to npm. Written in TypeScript, uses Commander.js for argument parsing, and Vitest for testing. Targets Node 18+."
+
+# Mobile app with offline support
+npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server."
+```
+
+#### Cursor
+
+```bash
+# Existing project — auto-detects structure
+npx @isonnymichael/bedrock init --tool cursor
+
+# Microservices backend
+npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications."
+```
+
+---
+
+### Writing a Good `--about` Description
+
+The more specific your description, the more tailored the generated config will be. Include:
+
+- **Language and runtime** with version (e.g., `Node.js 20`, `Python 3.12`, `Go 1.22`)
+- **Frameworks and libraries** (e.g., `Next.js 14 App Router`, `FastAPI`, `Vue 3 Composition API`)
+- **Database and data layer** (e.g., `PostgreSQL with Prisma ORM`, `MongoDB with Mongoose`, `Redis for caching`)
+- **Package manager** (e.g., `pnpm`, `npm`, `yarn`, `pip`, `cargo`)
+- **Key integrations** (e.g., `Stripe for billing`, `Auth0 for authentication`, `AWS S3 for storage`)
+- **Deployment target** (e.g., `Docker on AWS ECS`, `Vercel`, `Kubernetes on GKE`)
+- **Testing tools** (e.g., `Vitest`, `Jest`, `pytest`, `Playwright for E2E`)
+
+**Weak description:**
+```
+A web app with a backend and database
+```
+
+**Strong description:**
+```
+A multi-tenant project management SaaS built with Next.js 14 App Router (TypeScript, Tailwind CSS),
+a NestJS REST API, PostgreSQL with Prisma ORM, Redis for caching and sessions, and Stripe for
+subscription billing. Deployed on Vercel (frontend) and AWS ECS (backend). Uses Vitest and
+Playwright for testing.
+```
 
 ---
 
 ## 🤖 Supported AI Tools
 
-| Tool | Config Location | Files Generated |
-|------|----------------|-----------------|
-| **Claude Code** | `.claude/` | `CLAUDE.md`, rules, slash commands, skills |
-| **Antigravity (Gemini)** | `.agents/` | `GEMINI.md`, rules, workflows, skills |
-| **Trae** | `.trae/` | `AGENTS.md`, rules, prompts |
-| **Cursor** | `.cursor/rules/` | `.mdc` rule files for all categories |
+| Tool | Value | Config Location | Files Generated |
+|------|-------|----------------|-----------------|
+| **Claude Code** | `claude` | `.claude/` | `CLAUDE.md`, rules, slash commands, skills |
+| **Antigravity (Gemini)** | `antigravity` | `.agents/` | `GEMINI.md`, rules, workflows, skills |
+| **Trae** | `trae` | `.trae/` | `AGENTS.md`, rules, prompts |
+| **Cursor** | `cursor` | `.cursor/rules/` | `.mdc` rule files for all categories |
 
 ### What Gets Generated
 
@@ -84,12 +171,34 @@ Each assistant config includes:
 
 ---
 
+## 💡 Tips
+
+**Be specific with your tech stack.**
+Bedrock uses your `--about` description to tailor every generated file. Vague descriptions produce generic configs; detailed ones produce configs your AI agent can actually enforce.
+
+**Run it on a fresh project before writing any code.**
+The best time to initialize is before you start. Bedrock sets the conventions your AI agent will follow from day one, preventing config drift and inconsistency later.
+
+**Re-run when your stack changes.**
+Added a new framework, switched ORMs, or introduced a new service? Run `bedrock init` again with an updated `--about` to regenerate configs that reflect the current state of your project.
+
+**Commit the generated files.**
+Check the generated config folder (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) into version control. This ensures every teammate and CI environment gets the same AI behavior.
+
+**Combine with your AI agent's context window.**
+After Bedrock generates the configs, point your AI agent to the master guide file (e.g., `CLAUDE.md`, `GEMINI.md`) at the start of each session to ensure it loads the full project context.
+
+**One tool at a time.**
+If your team uses multiple AI tools, run `bedrock init` once per tool. Each run generates a separate, self-contained config folder — they don't conflict.
+
+---
+
 ## 📁 Project Structure
 
 ```
 bedrock/
 ├── bin/
-│   └── bedrock.js          # CLI entrypoint
+│   └── bedrock.cjs          # CLI entrypoint
 ├── src/
 │   ├── index.js             # Commander.js program setup
 │   ├── commands/
@@ -116,8 +225,8 @@ cd bedrock
 # Install dependencies
 npm install
 
-# Run the init command locally
-npm run init
+# Run non-interactively
+node bin/bedrock.cjs init --tool antigravity --about "my project"
 ```
 
 ### Adding a New Generator
@@ -131,7 +240,7 @@ The `context` object passed to every generator contains:
 ```js
 {
   isFresh: Boolean,        // true if project has no existing files
-  projectAbout: String,    // user-provided project description
+  projectAbout: String,    // user-provided project description (may be empty)
   projectStructure: String // scanned directory tree (existing projects only)
 }
 ```
@@ -143,7 +252,6 @@ The `context` object passed to every generator contains:
 | Package | Purpose |
 |---------|---------|
 | [`commander`](https://github.com/tj/commander.js) | CLI argument parsing |
-| [`prompts`](https://github.com/terkelg/prompts) | Interactive terminal prompts |
 | [`kleur`](https://github.com/lukeed/kleur) | Terminal color output |
 
 ---

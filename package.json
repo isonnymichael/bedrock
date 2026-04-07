@@ -1,6 +1,6 @@
 {
   "name": "@isonnymichael/bedrock",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Instruction-driven system initialization for AI Coding Assistants",
   "main": "src/index.js",
   "type": "module",
@@ -43,7 +43,6 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "commander": "^12.0.0",
-    "kleur": "^4.1.5",
-    "prompts": "^2.4.2"
+    "kleur": "^4.1.5"
   }
 }
