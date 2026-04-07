@@ -18,6 +18,7 @@
 <p align="center">
   <a href="#-getting-started">Getting Started</a> •
   <a href="#-usage">Usage</a> •
+  <a href="#-enhance">Enhance</a> •
   <a href="#-supported-ai-tools">Supported Tools</a> •
   <a href="#-tips">Tips</a> •
   <a href="#-development">Development</a>
@@ -31,6 +32,7 @@
 - 🧠 **Context-aware** — Auto-detects existing projects and reads their structure, or accepts a description for new ones
 - 📋 **Production-grade output** — Generates master guides, formatting rules, testing standards, security guardrails, workflows, and more
 - ⚡ **Zero setup** — One command, instant output — the generated prompt is handed off directly to your AI agent to execute
+- 🔄 **Enhance existing configs** — Keep your AI configurations in sync as your project evolves with the `enhance` command
 - 🔧 **Extensible** — Clean generator architecture makes it easy to add support for new AI tools
 
 ---
@@ -148,6 +150,53 @@ Playwright for testing.
 
 ---
 
+## 🔄 Enhance
+
+When your project evolves — new libraries, new services, new architecture — your AI configs can fall behind. The `enhance` command reads your existing config files, compares them against the current project structure, and generates a prompt that tells your AI agent exactly what to update.
+
+```bash
+npx @isonnymichael/bedrock enhance --tool <tool> [--about "<what-changed>"]
+```
+
+**Options:**
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `-t, --tool <tool>` | Yes | AI tool to enhance. Choices: `claude`, `antigravity`, `trae`, `cursor` |
+| `-a, --about <description>` | No | Describe what changed. If omitted, the AI infers changes from the project structure |
+
+If no existing configuration is found for the given tool, Bedrock will tell you to run `init` first.
+
+### Enhance Examples
+
+```bash
+# Let the AI infer what changed from the project structure
+npx @isonnymichael/bedrock enhance --tool trae
+
+# Describe what changed explicitly
+npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL"
+
+# New service added to a monorepo
+npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API"
+
+# Major dependency upgrade
+npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"
+
+# New infrastructure layer
+npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"
+```
+
+### What the AI will do
+
+1. **Update the master guide** — Reflect new frameworks, libraries, services, or architectural changes
+2. **Update tech stack references** — Correct outdated versions, tools, or package names
+3. **Add missing rules** — Generate rules for newly introduced technologies not yet covered
+4. **Remove stale rules** — Delete or rewrite rules for removed dependencies or old patterns
+5. **Preserve customizations** — Keep all existing custom rules and team-specific decisions that are still valid
+6. **Fill gaps** — Generate any expected config files that are missing entirely
+
+---
+
 ## 🤖 Supported AI Tools
 
 | Tool | Value | Config Location | Files Generated |
@@ -179,8 +228,8 @@ Bedrock uses your `--about` description to tailor every generated file. Vague de
 **Run it on a fresh project before writing any code.**
 The best time to initialize is before you start. Bedrock sets the conventions your AI agent will follow from day one, preventing config drift and inconsistency later.
 
-**Re-run when your stack changes.**
-Added a new framework, switched ORMs, or introduced a new service? Run `bedrock init` again with an updated `--about` to regenerate configs that reflect the current state of your project.
+**Use `enhance` when your stack changes, not `init`.**
+Added a new framework, switched ORMs, or introduced a new service? Run `bedrock enhance` — it reads your existing configs and updates only what has changed, preserving your customizations. Use `init` only for fresh setups.
 
 **Commit the generated files.**
 Check the generated config folder (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) into version control. This ensures every teammate and CI environment gets the same AI behavior.
@@ -202,14 +251,17 @@ bedrock/
 ├── src/
 │   ├── index.js             # Commander.js program setup
 │   ├── commands/
-│   │   └── init.js          # `bedrock init` command logic
+│   │   ├── init.js          # `bedrock init` command logic
+│   │   └── enhance.js       # `bedrock enhance` command logic
 │   ├── generators/
-│   │   ├── antigravity.js   # Prompt generator for Antigravity (Gemini)
-│   │   ├── claude.js        # Prompt generator for Claude Code
-│   │   ├── cursor.js        # Prompt generator for Cursor
-│   │   └── trae.js          # Prompt generator for Trae
+│   │   ├── antigravity.js   # Init prompt generator for Antigravity (Gemini)
+│   │   ├── claude.js        # Init prompt generator for Claude Code
+│   │   ├── cursor.js        # Init prompt generator for Cursor
+│   │   ├── trae.js          # Init prompt generator for Trae
+│   │   └── enhance.js       # Enhance prompt generator (all tools)
 │   └── utils/
-│       └── fs-helpers.js    # File system utilities
+│       ├── fs-helpers.js    # File system utilities
+│       └── config-reader.js # Reads existing AI config files
 └── package.json
 ```
 
