@@ -7,7 +7,7 @@ export async function main() {
   program
     .name('bedrock')
     .description('Instruction-driven system initialization for AI Coding Assistants')
-    .version('1.0.0');
+    .version('0.0.1');
 
   program
     .command('init')

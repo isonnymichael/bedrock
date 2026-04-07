@@ -13,39 +13,38 @@ export async function initCommand() {
   console.log(kleur.dim('This tool generates prompt instructions for your AI agent to build out your configurations.\n'));
 
   const aiSelection = await prompts({
-    type: 'multiselect',
-    name: 'tools',
-    message: 'What AI Tools do you use? (Space to select, Enter to confirm)',
+    type: 'select',
+    name: 'tool',
+    message: 'What AI Tool do you use?',
     choices: [
       { title: 'Claude Code', value: 'claude' },
       { title: 'Antigravity (Gemini)', value: 'antigravity' },
       { title: 'Trae', value: 'trae' },
       { title: 'Cursor', value: 'cursor' }
-    ],
-    min: 1
+    ]
   });
 
-  if (!aiSelection.tools || aiSelection.tools.length === 0) {
-    console.log(kleur.red('No tools selected. Exiting...'));
+  if (!aiSelection.tool) {
+    console.log(kleur.red('No tool selected. Exiting...'));
     process.exit(0);
   }
 
   const isFresh = await isProjectFresh();
-  let projectAbout = '';
   let projectStructure = '';
 
-  if (isFresh) {
-    console.log(kleur.yellow('\nDetected a fresh project.'));
-    const response = await prompts({
-      type: 'text',
-      name: 'about',
-      message: 'What is this project about? (This context will be given to the AI)'
-    });
-    projectAbout = response.about || 'A new project.';
-  } else {
+  if (!isFresh) {
     console.log(kleur.green('\nDetected an existing project. Analyzing structure...'));
     projectStructure = await getProjectStructure();
   }
+
+  const response = await prompts({
+    type: 'text',
+    name: 'about',
+    message: 'Describe your project (leave blank if the project exist, AI will auto generate for you):',
+    validate: value => (isFresh && !value.trim()) ? 'Please provide a description for your new project so the AI knows what to do.' : true
+  });
+
+  const projectAbout = response.about || '';
 
   const context = {
     isFresh,
@@ -54,19 +53,18 @@ export async function initCommand() {
   };
 
   let finalPrompt = `\n======================================================\n`;
-  finalPrompt += `AI AGENT INSTRUCTIONS:\n`;
-  finalPrompt += `The user has requested to initialize Bedrock configurations for their project.\n`;
+  finalPrompt += `INSTRUCTIONS:\n`;
+  finalPrompt += `The user has requested to initialize AI Configurations, Project Specifications, Workflows, Guardrails, and Rules for their project.\n`;
   finalPrompt += `Please autonomously create the following folders and files with intelligently generated boilerplate rules according to the context provided:\n`;
 
-  for (const tool of aiSelection.tools) {
-    try {
-      if (tool === 'claude') finalPrompt += await generateClaude(context);
-      if (tool === 'antigravity') finalPrompt += await generateAntigravity(context);
-      if (tool === 'trae') finalPrompt += await generateTrae(context);
-      if (tool === 'cursor') finalPrompt += await generateCursor(context);
-    } catch (err) {
-      console.log(kleur.red(`❌ Failed generating for ${tool}: ${err.message}`));
-    }
+  const tool = aiSelection.tool;
+  try {
+    if (tool === 'claude') finalPrompt += await generateClaude(context);
+    if (tool === 'antigravity') finalPrompt += await generateAntigravity(context);
+    if (tool === 'trae') finalPrompt += await generateTrae(context);
+    if (tool === 'cursor') finalPrompt += await generateCursor(context);
+  } catch (err) {
+    console.log(kleur.red(`❌ Failed generating for ${tool}: ${err.message}`));
   }
 
   finalPrompt += `\nUse your tools to write these files into the workspace now.`;
@@ -74,5 +72,5 @@ export async function initCommand() {
 
   // Output the final prompt to the terminal so the reading AI executes it
   console.log(kleur.cyan(finalPrompt));
-  console.log(kleur.bgGreen().black(' ✨ Prompt generated. The AI should now take over. \n'));
+  console.log(kleur.bgGreen().black(` ✨ Prompt generated for ${tool}. The AI should now take over. \n`));
 }

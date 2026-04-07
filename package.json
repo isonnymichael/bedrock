@@ -8,8 +8,7 @@
     "bedrock": "./bin/bedrock.js"
   },
   "scripts": {
-    "start": "node ./bin/bedrock.js",
-    "test": "node ./bin/bedrock.js init"
+    "init": "node ./bin/bedrock.js init"
   },
   "keywords": [
     "ai",
