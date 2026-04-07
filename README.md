@@ -31,7 +31,7 @@
 - 🤖 **Multi-assistant support** — Generate configs for Claude Code, Antigravity (Gemini), Trae, and Cursor
 - 🧠 **Context-aware** — Auto-detects existing projects and reads their structure, or accepts a description for new ones
 - 📋 **Production-grade output** — Generates master guides, formatting rules, testing standards, security guardrails, workflows, and more
-- ⚡ **Zero setup** — One command, instant output — the generated prompt is handed off directly to your AI agent to execute
+- ⚡ **Zero setup** — Paste one prompt into your AI agent chat, and it runs the command, reads the output, and writes every config file automatically
 - 🔄 **Enhance existing configs** — Keep your AI configurations in sync as your project evolves with the `enhance` command
 - 🔧 **Extensible** — Clean generator architecture makes it easy to add support for new AI tools
 
@@ -47,13 +47,30 @@
 
 ## 📖 Usage
 
-Prompt your AI agent to run the following command. The `--tool` flag is **required**; `--about` is optional (Bedrock will auto-detect your project structure if omitted).
+> **Bedrock is designed to be invoked through your AI Agent chat — not run directly in a terminal.**
+> Open your AI agent (Claude Code, Cursor, Trae, Antigravity, etc.), then paste a prompt like the ones below. The agent will run the command, create the folder structure, and populate every config file automatically.
 
-```bash
-npx @isonnymichael/bedrock init --tool <tool> [--about "<description>"]
+### How to use
+
+**Step 1 — Open your AI Agent chat.**
+
+**Step 2 — Paste a prompt telling the agent to run Bedrock:**
+
+```
+Run npx @isonnymichael/bedrock init --tool <tool>
 ```
 
-**Options:**
+Or with a project description:
+
+```
+Run npx @isonnymichael/bedrock init --tool <tool> --about "<description>"
+```
+
+**Step 3 — The agent runs the command, reads the generated instructions, and writes all config files into your project.**
+
+---
+
+**Command reference:**
 
 | Flag | Required | Description |
 |------|----------|-------------|
@@ -68,57 +85,70 @@ If `--tool` is missing or invalid, Bedrock prints an error with the correct usag
 
 #### Claude Code
 
-```bash
-# Existing project — auto-detects structure
-npx @isonnymichael/bedrock init --tool claude
+Open Claude Code agent chat and type:
 
-# New SaaS backend
-npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT."
+```
+Run npx @isonnymichael/bedrock init --tool claude
+```
 
-# Monorepo
-npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm."
+With a project description:
+
+```
+Run npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT."
+```
+
+```
+Run npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm."
 ```
 
 #### Antigravity (Gemini)
 
-```bash
-# Existing project — auto-detects structure
-npx @isonnymichael/bedrock init --tool antigravity
+Open Antigravity agent chat and type:
 
-# New mobile app
-npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching."
+```
+Run npx @isonnymichael/bedrock init --tool antigravity
+```
 
-# Data pipeline
-npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse."
+With a project description:
+
+```
+Run npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching."
+```
+
+```
+Run npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse."
 ```
 
 #### Trae
 
-```bash
-# Existing project — auto-detects structure
-npx @isonnymichael/bedrock init --tool trae
+Open Trae agent chat and type:
 
-# Fullstack web app
-npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev."
+```
+Run npx @isonnymichael/bedrock init --tool trae
+```
 
-# E-commerce platform
-npx @isonnymichael/bedrock init --tool trae --about "An e-commerce platform built with Next.js 14 App Router, Tailwind CSS, and Shopify Storefront API. Supports server components, ISR, and edge functions."
+With a project description:
 
-# CLI tool
-npx @isonnymichael/bedrock init --tool trae --about "A Node.js CLI tool published to npm. Written in TypeScript, uses Commander.js for argument parsing, and Vitest for testing. Targets Node 18+."
+```
+Run npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev."
+```
 
-# Mobile app with offline support
-npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server."
+```
+Run npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server."
 ```
 
 #### Cursor
 
-```bash
-# Existing project — auto-detects structure
-npx @isonnymichael/bedrock init --tool cursor
+Open Cursor agent chat and type:
 
-# Microservices backend
-npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications."
+```
+Run npx @isonnymichael/bedrock init --tool cursor
+```
+
+With a project description:
+
+```
+Run npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications."
 ```
 
 ---
@@ -154,8 +184,16 @@ Playwright for testing.
 
 When your project evolves — new libraries, new services, new architecture — your AI configs can fall behind. The `enhance` command reads your existing config files, compares them against the current project structure, and generates a prompt that tells your AI agent exactly what to update.
 
-```bash
-npx @isonnymichael/bedrock enhance --tool <tool> [--about "<what-changed>"]
+Open your AI agent chat and type:
+
+```
+Run npx @isonnymichael/bedrock enhance --tool <tool>
+```
+
+Or describe what changed:
+
+```
+Run npx @isonnymichael/bedrock enhance --tool <tool> --about "<what-changed>"
 ```
 
 **Options:**
@@ -169,21 +207,28 @@ If no existing configuration is found for the given tool, Bedrock will tell you 
 
 ### Enhance Examples
 
-```bash
-# Let the AI infer what changed from the project structure
-npx @isonnymichael/bedrock enhance --tool trae
+Let the AI infer what changed:
 
-# Describe what changed explicitly
-npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL"
+```
+Run npx @isonnymichael/bedrock enhance --tool trae
+```
 
-# New service added to a monorepo
-npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API"
+Describe what changed explicitly:
 
-# Major dependency upgrade
-npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"
+```
+Run npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL"
+```
 
-# New infrastructure layer
-npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"
+```
+Run npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API"
+```
+
+```
+Run npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"
+```
+
+```
+Run npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"
 ```
 
 ### What the AI will do
@@ -277,7 +322,7 @@ cd bedrock
 # Install dependencies
 npm install
 
-# Run non-interactively
+# Test locally (direct execution — for development only, not normal usage)
 node bin/bedrock.cjs init --tool antigravity --about "my project"
 ```
 
