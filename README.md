@@ -40,41 +40,14 @@
 
 - [Node.js](https://nodejs.org/) 18+
 
-### Installation
-
-#### Global (recommended)
-
-```bash
-npm install -g bedrock
-```
-
-#### Local (development)
-
-```bash
-git clone https://github.com/your-username/bedrock.git
-cd bedrock
-npm install
-```
-
 ---
 
 ## 📖 Usage
 
-Run `bedrock init` in the root of your project:
+Open your AI Coding Assistant and give it the following prompt:
 
 ```bash
-npx bedrock init
-```
-
-Or if installed locally/globally:
-
-```bash
-# Local dev
-npm run init
-
-# Global install
-npm install -g bedrock
-bedrock init
+run npx @isonnymichael/bedrock init
 ```
 
 ### Interactive Flow
@@ -137,7 +110,7 @@ bedrock/
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/bedrock.git
+git clone https://github.com/isonnymichael/bedrock.git
 cd bedrock
 
 # Install dependencies

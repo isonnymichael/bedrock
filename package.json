@@ -1,7 +1,7 @@
 {
-  "name": "bedrock",
+  "name": "@isonnymichael/bedrock",
   "version": "0.0.1",
-  "description": "Instruction-driven system for AI",
+  "description": "Instruction-driven system initialization for AI Coding Assistants",
   "main": "src/index.js",
   "type": "module",
   "bin": {
@@ -9,6 +9,27 @@
   },
   "scripts": {
     "init": "node ./bin/bedrock.js init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isonnymichael/bedrock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isonnymichael/bedrock/issues"
+  },
+  "homepage": "https://github.com/isonnymichael/bedrock#readme",
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "ai",

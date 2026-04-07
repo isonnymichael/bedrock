@@ -28,7 +28,7 @@ Be respectful, inclusive, and constructive. We're all here to build something us
 1. **Fork** the repository on GitHub
 2. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/your-username/bedrock.git
+   git clone https://github.com/isonnymichael/bedrock.git
    cd bedrock
    ```
 3. **Install** dependencies:
@@ -140,7 +140,7 @@ docs(readme): update supported tools table
 
 ## Reporting Bugs
 
-Open a [GitHub Issue](https://github.com/your-username/bedrock/issues/new) and include:
+Open a [GitHub Issue](https://github.com/isonnymichael/bedrock/issues/new) and include:
 
 - Your OS and Node.js version
 - The command you ran
@@ -151,7 +151,7 @@ Open a [GitHub Issue](https://github.com/your-username/bedrock/issues/new) and i
 
 ## Requesting Features
 
-Open a [GitHub Issue](https://github.com/your-username/bedrock/issues/new) with:
+Open a [GitHub Issue](https://github.com/isonnymichael/bedrock/issues/new) with:
 
 - Which AI tool you'd like support for (with a link to its docs)
 - A brief description of what config files / structure it expects
