@@ -182,53 +182,52 @@ Playwright for testing.
 
 ## 🔄 Enhance
 
-When your project evolves — new libraries, new services, new architecture — your AI configs can fall behind. The `enhance` command reads your existing config files, compares them against the current project structure, and generates a prompt that tells your AI agent exactly what to update.
+When your project evolves — new libraries, new services, new architecture — your AI configs can fall behind. The `enhance` command automatically detects which AI tools have existing configurations, reads them, compares them against the current project structure, and generates a prompt that tells your AI agent exactly what to update.
 
 Open your AI agent chat and type:
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool <tool>` and execute the results
+Run `npx @isonnymichael/bedrock enhance` and execute the results
 ```
 
 Or describe what changed:
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool <tool> --about "<what-changed>"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "<what-changed>"` and execute the results
 ```
 
 **Options:**
 
 | Flag | Required | Description |
 |------|----------|-------------|
-| `-t, --tool <tool>` | Yes | AI tool to enhance. Choices: `claude`, `antigravity`, `trae`, `cursor` |
 | `-a, --about <description>` | No | Describe what changed. If omitted, the AI infers changes from the project structure |
 
-If no existing configuration is found for the given tool, Bedrock will tell you to run `init` first.
+Bedrock automatically detects which AI tools have existing configurations (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) and enhances all of them at once. If no configurations are found, Bedrock will tell you to run `init` first.
 
 ### Enhance Examples
 
 Let the AI infer what changed:
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool trae` and execute the results
+Run `npx @isonnymichael/bedrock enhance` and execute the results
 ```
 
 Describe what changed explicitly:
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool claude --about "Added Redis caching and switched from REST to GraphQL"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Added Redis caching and switched from REST to GraphQL"` and execute the results
 ```
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool antigravity --about "Added a Python ML inference service alongside the existing Node.js API"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Added a Python ML inference service alongside the existing Node.js API"` and execute the results
 ```
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool cursor --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Migrated from Webpack to Vite, upgraded to React 19 and TypeScript 5.5"` and execute the results
 ```
 
 ```
-Run `npx @isonnymichael/bedrock enhance --tool trae --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"` and execute the results
 ```
 
 ### What the AI will do
@@ -274,7 +273,7 @@ Bedrock uses your `--about` description to tailor every generated file. Vague de
 The best time to initialize is before you start. Bedrock sets the conventions your AI agent will follow from day one, preventing config drift and inconsistency later.
 
 **Use `enhance` when your stack changes, not `init`.**
-Added a new framework, switched ORMs, or introduced a new service? Run `bedrock enhance` — it reads your existing configs and updates only what has changed, preserving your customizations. Use `init` only for fresh setups.
+Added a new framework, switched ORMs, or introduced a new service? Run `bedrock enhance` — it auto-detects your existing configs and updates only what has changed, preserving your customizations. Use `init` only for fresh setups.
 
 **Commit the generated files.**
 Check the generated config folder (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) into version control. This ensures every teammate and CI environment gets the same AI behavior.

@@ -24,7 +24,6 @@ export async function main() {
   program
     .command('enhance')
     .description('Update existing AI configurations to reflect project changes')
-    .option('-t, --tool <tool>', 'AI tool to enhance (claude, antigravity, trae, cursor)')
     .option('-a, --about <description>', 'Describe what changed in your project')
     .action(enhanceCommand);
 

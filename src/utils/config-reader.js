@@ -5,13 +5,27 @@ const CONFIG_PATHS = {
   claude: '.claude',
   antigravity: '.agents',
   trae: '.trae',
-  cursor: '.cursor/rules',
+  cursor: '.cursor',
 };
 
 const READABLE_EXTENSIONS = ['.md', '.mdc', '.json'];
 
 export function getConfigPath(tool) {
   return CONFIG_PATHS[tool];
+}
+
+export function getAllTools() {
+  return Object.keys(CONFIG_PATHS);
+}
+
+export async function detectExistingTools() {
+  const detected = [];
+  for (const tool of Object.keys(CONFIG_PATHS)) {
+    if (await hasExistingConfigs(tool)) {
+      detected.push(tool);
+    }
+  }
+  return detected;
 }
 
 export async function hasExistingConfigs(tool) {
