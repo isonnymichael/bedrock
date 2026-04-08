@@ -1,4 +1,3 @@
-import kleur from 'kleur';
 import { isProjectFresh, getProjectStructure, createFile } from '../utils/fs-helpers.js';
 import path from 'path';
 
@@ -11,21 +10,21 @@ import { generateCursor, createCursorStructure } from '../generators/cursor.js';
 const VALID_TOOLS = ['claude', 'antigravity', 'trae', 'cursor'];
 
 function showUsageError(message) {
-  console.log(kleur.red(`\n✖ Error: ${message}\n`));
-  console.log(kleur.white('Usage:'));
-  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool <tool> [--about <description>]\n'));
-  console.log(kleur.white('Options:'));
-  console.log(kleur.cyan('  -t, --tool <tool>          ') + kleur.dim(`Required. AI tool to configure. Choices: ${VALID_TOOLS.join(', ')}`));
-  console.log(kleur.cyan('  -a, --about <description>  ') + kleur.dim('Optional. Project description (AI will auto-detect if omitted)\n'));
-  console.log(kleur.white('Examples:'));
-  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool antigravity'));
-  console.log(kleur.cyan('  npx @isonnymichael/bedrock init --tool claude --about "A REST API built with Node.js"\n'));
+  console.error(`\n✖ Error: ${message}\n`);
+  console.error(`Usage:`);
+  console.error(`  npx @isonnymichael/bedrock init --tool <tool> [--about <description>]\n`);
+  console.error(`Options:`);
+  console.error(`  -t, --tool <tool>          Required. AI tool to configure. Choices: ${VALID_TOOLS.join(', ')}`);
+  console.error(`  -a, --about <description>  Optional. Project description (AI will auto-detect if omitted)\n`);
+  console.error(`Examples:`);
+  console.error(`  npx @isonnymichael/bedrock init --tool antigravity`);
+  console.error(`  npx @isonnymichael/bedrock init --tool claude --about "A REST API built with Node.js"\n`);
   process.exit(1);
 }
 
 export async function initCommand(options) {
-  console.log(kleur.bgBlue().white(' 🚀 Welcome to Bedrock AI ! \n'));
-  console.log(kleur.dim('This tool generates prompt instructions for your AI agent to build out your configurations.\n'));
+  console.log(' 🚀 Welcome to Bedrock AI !\n');
+  console.log('This tool generates prompt instructions for your AI agent to build out your configurations.\n');
 
   const tool = options.tool;
 
@@ -41,7 +40,7 @@ export async function initCommand(options) {
   let projectStructure = '';
 
   if (!isFresh) {
-    console.log(kleur.green('\nDetected an existing project. Analyzing structure...'));
+    console.log('\nDetected an existing project. Analyzing structure...');
     projectStructure = await getProjectStructure();
   }
 
@@ -51,15 +50,15 @@ export async function initCommand(options) {
     projectStructure
   };
 
-  console.log(kleur.dim('Creating folder structure...'));
+  console.log('Creating folder structure...');
   try {
     if (tool === 'claude') await createClaudeStructure();
     if (tool === 'antigravity') await createAntigravityStructure();
     if (tool === 'trae') await createTraeStructure();
     if (tool === 'cursor') await createCursorStructure();
-    console.log(kleur.green('✔ Folders created.\n'));
+    console.log('✔ Folders created.\n');
   } catch (err) {
-    console.log(kleur.red(`❌ Failed creating folder structure: ${err.message}`));
+    console.error(`❌ Failed creating folder structure: ${err.message}`);
   }
 
   let finalPrompt = `\n======================================================\n`;
@@ -73,7 +72,7 @@ export async function initCommand(options) {
     if (tool === 'trae') finalPrompt += await generateTrae(context);
     if (tool === 'cursor') finalPrompt += await generateCursor(context);
   } catch (err) {
-    console.log(kleur.red(`❌ Failed generating for ${tool}: ${err.message}`));
+    console.error(`❌ Failed generating for ${tool}: ${err.message}`);
   }
 
   finalPrompt += `\nUse your tools to write these files into the workspace now.`;
@@ -82,6 +81,6 @@ export async function initCommand(options) {
 
   const bedrockMdPath = path.join(process.cwd(), 'BEDROCK.md');
   await createFile(bedrockMdPath, finalPrompt);
-  console.log(kleur.green(`✔ Prompt written to BEDROCK.md\n`));
-  console.log(kleur.bgGreen().black(` ✨ Prompt generated for ${tool}. Open BEDROCK.md and pass it to your AI agent. \n`));
+  console.log(`✔ Prompt written to BEDROCK.md\n`);
+  console.log(` ✨ Prompt generated for ${tool}. Open BEDROCK.md and pass it to your AI agent. \n`);
 }

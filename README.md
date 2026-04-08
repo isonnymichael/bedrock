@@ -332,15 +332,6 @@ node bin/bedrock.cjs init --tool claude --about "my project"
 
 ---
 
-## 📦 Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| [`commander`](https://github.com/tj/commander.js) | CLI argument parsing |
-| [`kleur`](https://github.com/lukeed/kleur) | Terminal color output |
-
----
-
 ## 📄 License
 
 GPL-3.0 © Sonny Michael
