@@ -1,83 +1,110 @@
-<h1 align="center">🪨 Bedrock | AI-Ready Project Configurator 🚀</h1>
+<h1 align="center">🪨 Bedrock</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="License">
+  <strong>One command. Production-grade AI configuration for your entire project.</strong>
+</p>
+
+<p align="center">
+  Bootstrap AI-ready configs for Claude Code, Cursor, Trae, and Antigravity — tailored to your exact tech stack, in seconds.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/npm/v/@isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="npm version">
+  <img src="https://img.shields.io/npm/dm/@isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="npm downloads">
   <img src="https://img.shields.io/github/stars/isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="Stars">
-  <img src="https://img.shields.io/github/forks/isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="Forks">
+  <img src="https://img.shields.io/github/license/isonnymichael/bedrock?style=flat-square&color=3b82f6" alt="License">
   <img src="https://img.shields.io/github/issues/isonnymichael/bedrock?style=flat-square&color=ef4444" alt="Issues">
+  <a href="https://github.com/sponsors/isonnymichael"><img src="https://img.shields.io/badge/sponsor-♥-ea4aaa?style=flat-square" alt="Sponsor"></a>
 </p>
 
 <p align="center">
-  <strong>Bootstrap AI-ready project configurations with a single command.</strong>
-</p>
-
-<p align="center">
-  Bedrock generates standardized rules, skills, and project context tailored to tools like Claude Code, Antigravity, and Trae—so you can get consistent, instruction-driven AI behavior instantly.
-</p>
-
-<p align="center">
+  <a href="#-why-bedrock">Why Bedrock</a> •
   <a href="#-getting-started">Getting Started</a> •
   <a href="#-usage">Usage</a> •
   <a href="#-enhance">Enhance</a> •
   <a href="#-supported-ai-tools">Supported Tools</a> •
-  <a href="#-tips">Tips</a> •
-  <a href="#-development">Development</a>
+  <a href="#-contributing">Contributing</a>
 </p>
+
+---
+
+## The Problem
+
+You set up an AI agent. It writes decent code — but it doesn't know your stack, your conventions, or your rules. You spend more time correcting it than shipping.
+
+The fix is a well-structured config: a master guide, formatting rules, testing standards, security guardrails. But writing all that from scratch takes hours — and it drifts the moment your stack changes.
+
+**Bedrock generates all of it in one command.**
+
+---
+
+## Demo
+
+**Initialize on a fresh project:**
+
+![Bedrock init on a fresh project](assets/demo-bedrock-init-fresh-project.gif)
+
+**Initialize on an existing project (auto-detected):**
+
+![Bedrock init on an existing project](assets/demo-bedrock-init-existing-project.gif)
+
+**Keep configs in sync as your project evolves:**
+
+![Bedrock enhance](assets/demo-bedrock-enhance.gif)
 
 ---
 
 ## ✨ Features
 
-- 🤖 **Multi-assistant support** — Generate configs for Claude Code, Antigravity (Gemini), Trae, and Cursor
-- 🧠 **Context-aware** — Auto-detects existing projects and reads their structure, or accepts a description for new ones
-- 📋 **Production-grade output** — Generates master guides, formatting rules, testing standards, security guardrails, workflows, and more
-- ⚡ **Zero setup** — Paste one prompt into your AI agent chat, and it runs the command, reads the output, and writes every config file automatically
-- 🔄 **Enhance existing configs** — Keep your AI configurations in sync as your project evolves with the `enhance` command
-- 🔧 **Extensible** — Clean generator architecture makes it easy to add support for new AI tools
+- **Multi-tool support** — Claude Code, Cursor, Trae, Antigravity (Gemini)
+- **Context-aware generation** — Auto-scans existing projects, or take a description for new ones
+- **Production-grade output** — Master guide, formatting rules, testing standards, security guardrails, workflows, skills
+- **Zero setup** — Paste one prompt into your AI agent chat and it writes every config file automatically
+- **Enhance, don't redo** — Keep configs in sync as your stack evolves with a single command
+- **Extensible** — Clean generator architecture makes adding new tools straightforward
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+**Requirements:** Node.js 18+
 
-- [Node.js](https://nodejs.org/) 18+
+Bedrock is designed to be invoked through your AI agent chat — not run directly in a terminal. The agent runs the command, reads the output, and writes every config file into your project automatically.
 
 ---
 
 ## 📖 Usage
 
-> **Bedrock is designed to be invoked through your AI Agent chat — not run directly in a terminal.**
-> Open your AI agent (Claude Code, Cursor, Trae, Antigravity, etc.), then paste a prompt like the ones below. The agent will run the command, create the folder structure, and populate every config file automatically.
+**Step 1 — Open your AI agent chat** (Claude Code, Cursor, Trae, Antigravity, etc.)
 
-### How to use
+**Step 2 — Paste this prompt:**
 
-**Step 1 — Open your AI Agent chat.**
+```
+Run `npx @isonnymichael/bedrock init` and execute the results
+```
 
-**Step 2 — Paste a prompt telling the agent to run Bedrock` and execute the results:**
+Bedrock auto-detects your project structure and picks the right tool. To target a specific tool:
 
 ```
 Run `npx @isonnymichael/bedrock init --tool <tool>` and execute the results
 ```
 
-Or with a project description:
+With a project description for more tailored output:
 
 ```
 Run `npx @isonnymichael/bedrock init --tool <tool> --about "<description>"` and execute the results
 ```
 
-**Step 3 — The agent runs the command, reads the generated instructions, and writes all config files into your project.**
+**Step 3 — Done.** The agent writes all config files into your project.
 
 ---
 
-**Command reference:**
+**Flags:**
 
 | Flag | Required | Description |
 |------|----------|-------------|
-| `-t, --tool <tool>` | Yes | AI tool to configure. Choices: `claude`, `antigravity`, `trae`, `cursor` |
-| `-a, --about <description>` | No | Project description. If omitted, Bedrock auto-detects the existing project structure |
-
-If `--tool` is missing or invalid, Bedrock prints an error with the correct usage and exits.
+| `-t, --tool <tool>` | No | AI tool to configure: `claude`, `antigravity`, `trae`, `cursor`. Auto-detected if omitted. |
+| `-a, --about <description>` | No | Project description. Auto-detected from project structure if omitted. |
 
 ---
 
@@ -85,106 +112,76 @@ If `--tool` is missing or invalid, Bedrock prints an error with the correct usag
 
 #### Claude Code
 
-Open Claude Code agent chat and type:
-
 ```
 Run `npx @isonnymichael/bedrock init --tool claude` and execute the results
 ```
-
-With a project description:
 
 ```
 Run `npx @isonnymichael/bedrock init --tool claude --about "A multi-tenant SaaS REST API built with Node.js 20, Express, PostgreSQL, and Prisma ORM. Handles billing via Stripe and auth via JWT."` and execute the results
 ```
 
-```
-Run `npx @isonnymichael/bedrock init --tool claude --about "A pnpm monorepo with a Next.js 14 frontend (App Router, Tailwind CSS) and a shared TypeScript component library published to npm."` and execute the results
-```
-
-#### Antigravity (Gemini)
-
-Open Antigravity agent chat and type:
-
-```
-Run `npx @isonnymichael/bedrock init --tool antigravity` and execute the results
-```
-
-With a project description:
-
-```
-Run `npx @isonnymichael/bedrock init --tool antigravity --about "A React Native 0.74 mobile app targeting iOS and Android. Uses Expo, Zustand for state management, and React Query for data fetching."` and execute the results
-```
-
-```
-Run `npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow for orchestration, dbt for transformations, and BigQuery as the data warehouse."` and execute the results
-```
-
-#### Trae
-
-Open Trae agent chat and type:
-
-```
-Run `npx @isonnymichael/bedrock init --tool trae` and execute the results
-```
-
-With a project description:
-
-```
-Run `npx @isonnymichael/bedrock init --tool trae --about "A fullstack web app with a Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. Uses PostgreSQL, SQLAlchemy, and Docker Compose for local dev."` and execute the results
-```
-
-```
-Run `npx @isonnymichael/bedrock init --tool trae --about "A React Native app with Expo Router for navigation, WatermelonDB for offline-first local storage, and a GraphQL API backend built with NestJS and Apollo Server."` and execute the results
-```
-
 #### Cursor
-
-Open Cursor agent chat and type:
 
 ```
 Run `npx @isonnymichael/bedrock init --tool cursor` and execute the results
 ```
 
-With a project description:
+```
+Run `npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes."` and execute the results
+```
+
+#### Trae
 
 ```
-Run `npx @isonnymichael/bedrock init --tool cursor --about "A Go microservices backend using gRPC for inter-service communication, deployed on Kubernetes. Includes services for auth, payments, and notifications."` and execute the results
+Run `npx @isonnymichael/bedrock init --tool trae` and execute the results
+```
+
+```
+Run `npx @isonnymichael/bedrock init --tool trae --about "A fullstack app with Vue 3 (Composition API, TypeScript) frontend and a FastAPI Python backend. PostgreSQL, SQLAlchemy, Docker Compose."` and execute the results
+```
+
+#### Antigravity (Gemini)
+
+```
+Run `npx @isonnymichael/bedrock init --tool antigravity` and execute the results
+```
+
+```
+Run `npx @isonnymichael/bedrock init --tool antigravity --about "A Python 3.12 data pipeline using Apache Airflow, dbt for transformations, and BigQuery as the warehouse."` and execute the results
 ```
 
 ---
 
 ### Writing a Good `--about` Description
 
-The more specific your description, the more tailored the generated config will be. Include:
+The more specific you are, the more tailored the config. Include:
 
-- **Language and runtime** with version (e.g., `Node.js 20`, `Python 3.12`, `Go 1.22`)
-- **Frameworks and libraries** (e.g., `Next.js 14 App Router`, `FastAPI`, `Vue 3 Composition API`)
-- **Database and data layer** (e.g., `PostgreSQL with Prisma ORM`, `MongoDB with Mongoose`, `Redis for caching`)
-- **Package manager** (e.g., `pnpm`, `npm`, `yarn`, `pip`, `cargo`)
-- **Key integrations** (e.g., `Stripe for billing`, `Auth0 for authentication`, `AWS S3 for storage`)
-- **Deployment target** (e.g., `Docker on AWS ECS`, `Vercel`, `Kubernetes on GKE`)
-- **Testing tools** (e.g., `Vitest`, `Jest`, `pytest`, `Playwright for E2E`)
+- **Language and runtime** with version — `Node.js 20`, `Python 3.12`, `Go 1.22`
+- **Frameworks** — `Next.js 14 App Router`, `FastAPI`, `Vue 3 Composition API`
+- **Database and ORM** — `PostgreSQL with Prisma`, `MongoDB with Mongoose`
+- **Package manager** — `pnpm`, `npm`, `yarn`, `pip`, `cargo`
+- **Key integrations** — `Stripe`, `Auth0`, `AWS S3`
+- **Deployment target** — `Vercel`, `AWS ECS`, `Kubernetes on GKE`
+- **Testing tools** — `Vitest`, `pytest`, `Playwright`
 
-**Weak description:**
+**Weak:**
 ```
 A web app with a backend and database
 ```
 
-**Strong description:**
+**Strong:**
 ```
-A multi-tenant project management SaaS built with Next.js 14 App Router (TypeScript, Tailwind CSS),
-a NestJS REST API, PostgreSQL with Prisma ORM, Redis for caching and sessions, and Stripe for
-subscription billing. Deployed on Vercel (frontend) and AWS ECS (backend). Uses Vitest and
-Playwright for testing.
+A multi-tenant SaaS built with Next.js 14 App Router, NestJS REST API, PostgreSQL with Prisma ORM,
+Redis for caching and sessions, and Stripe for billing. Deployed on Vercel and AWS ECS. Vitest + Playwright.
 ```
 
 ---
 
 ## 🔄 Enhance
 
-When your project evolves — new libraries, new services, new architecture — your AI configs can fall behind. The `enhance` command automatically detects which AI tools have existing configurations, reads them, compares them against the current project structure, and generates a prompt that tells your AI agent exactly what to update.
+Your stack changes. New libraries, new services, new architecture. Your AI configs shouldn't fall behind.
 
-Open your AI agent chat and type:
+The `enhance` command reads your existing configs, scans your current project, and generates a targeted update prompt — so your AI agent knows exactly what to change.
 
 ```
 Run `npx @isonnymichael/bedrock enhance` and execute the results
@@ -193,30 +190,27 @@ Run `npx @isonnymichael/bedrock enhance` and execute the results
 Or describe what changed:
 
 ```
-Run `npx @isonnymichael/bedrock enhance --about "<what-changed>"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Added Redis caching and switched from REST to GraphQL"` and execute the results
 ```
 
 **Options:**
 
 | Flag | Required | Description |
 |------|----------|-------------|
-| `-a, --about <description>` | No | Describe what changed. If omitted, the AI infers changes from the project structure |
+| `-a, --about <description>` | No | Describe what changed. Inferred from project structure if omitted. |
 
-Bedrock automatically detects which AI tools have existing configurations (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) and enhances all of them at once. If no configurations are found, Bedrock will tell you to run `init` first.
+Bedrock auto-detects existing configs (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) and enhances all of them at once. If none are found, it tells you to run `init` first.
 
-### Enhance Examples
+**The AI will:**
 
-Let the AI infer what changed:
+1. Update the master guide to reflect new frameworks, services, or architecture
+2. Correct outdated versions and tool references
+3. Add rules for newly introduced technologies
+4. Remove or rewrite rules for removed dependencies
+5. Preserve existing custom rules and team decisions
+6. Generate any missing expected config files
 
-```
-Run `npx @isonnymichael/bedrock enhance` and execute the results
-```
-
-Describe what changed explicitly:
-
-```
-Run `npx @isonnymichael/bedrock enhance --about "Added Redis caching and switched from REST to GraphQL"` and execute the results
-```
+### More enhance examples
 
 ```
 Run `npx @isonnymichael/bedrock enhance --about "Added a Python ML inference service alongside the existing Node.js API"` and execute the results
@@ -227,17 +221,8 @@ Run `npx @isonnymichael/bedrock enhance --about "Migrated from Webpack to Vite, 
 ```
 
 ```
-Run `npx @isonnymichael/bedrock enhance --about "Introduced Kubernetes for deployment, added Helm charts, and set up GitHub Actions CI/CD pipelines"` and execute the results
+Run `npx @isonnymichael/bedrock enhance --about "Introduced Kubernetes, added Helm charts, set up GitHub Actions CI/CD"` and execute the results
 ```
-
-### What the AI will do
-
-1. **Update the master guide** — Reflect new frameworks, libraries, services, or architectural changes
-2. **Update tech stack references** — Correct outdated versions, tools, or package names
-3. **Add missing rules** — Generate rules for newly introduced technologies not yet covered
-4. **Remove stale rules** — Delete or rewrite rules for removed dependencies or old patterns
-5. **Preserve customizations** — Keep all existing custom rules and team-specific decisions that are still valid
-6. **Fill gaps** — Generate any expected config files that are missing entirely
 
 ---
 
@@ -252,37 +237,34 @@ Run `npx @isonnymichael/bedrock enhance --about "Introduced Kubernetes for deplo
 
 ### What Gets Generated
 
-Each assistant config includes:
+Each config set includes:
 
 - **Master Guide** — Primary instruction file loaded at the start of every session
 - **Code Formatting Rules** — Indentation, naming conventions, import ordering, gold-standard snippets
 - **Testing Standards** — Framework recommendations, coverage thresholds, test structure examples
 - **Security Guardrails** — Input validation, secrets management, vulnerability prevention
 - **Architecture Guidelines** — Layer boundaries, module dependencies, API design conventions
-- **Workflows / Commands** — Reusable code review, documentation, onboarding, and refactoring workflows
-- **Skills** — Debugging skill templates with systematic step-by-step instructions
+- **Workflows / Commands** — Reusable review, documentation, onboarding, and refactoring workflows
+- **Skills** — Debugging skill templates with step-by-step instructions
 
 ---
 
 ## 💡 Tips
 
-**Be specific with your tech stack.**
-Bedrock uses your `--about` description to tailor every generated file. Vague descriptions produce generic configs; detailed ones produce configs your AI agent can actually enforce.
-
-**Run it on a fresh project before writing any code.**
+**Run it before you write any code.**
 The best time to initialize is before you start. Bedrock sets the conventions your AI agent will follow from day one, preventing config drift and inconsistency later.
 
+**Be specific with your tech stack.**
+Vague descriptions produce generic configs. Detailed ones produce configs your AI agent can actually enforce.
+
 **Use `enhance` when your stack changes, not `init`.**
-Added a new framework, switched ORMs, or introduced a new service? Run `bedrock enhance` — it auto-detects your existing configs and updates only what has changed, preserving your customizations. Use `init` only for fresh setups.
+`enhance` preserves your customizations and updates only what changed. Use `init` only for fresh setups.
 
 **Commit the generated files.**
-Check the generated config folder (`.claude/`, `.agents/`, `.trae/`, `.cursor/rules/`) into version control. This ensures every teammate and CI environment gets the same AI behavior.
+Check `.claude/`, `.agents/`, `.trae/`, or `.cursor/rules/` into version control. Every teammate and CI environment gets the same AI behavior.
 
-**Combine with your AI agent's context window.**
-After Bedrock generates the configs, point your AI agent to the master guide file (e.g., `CLAUDE.md`, `GEMINI.md`) at the start of each session to ensure it loads the full project context.
-
-**One tool at a time.**
-If your team uses multiple AI tools, run `bedrock init` once per tool. Each run generates a separate, self-contained config folder — they don't conflict.
+**Multiple tools? Run once per tool.**
+Each run generates a separate, self-contained config folder — they don't conflict.
 
 ---
 
@@ -311,34 +293,41 @@ bedrock/
 
 ---
 
-## 🛠️ Development
+## 🤝 Contributing
 
-```bash
-# Clone the repo
-git clone https://github.com/isonnymichael/bedrock.git
-cd bedrock
+Contributions are welcome. The most valuable areas:
 
-# Install dependencies
-npm install
-
-# Test locally (direct execution — for development only, not normal usage)
-node bin/bedrock.cjs init --tool antigravity --about "my project"
-```
+- **New tool generators** — Add support for a new AI coding tool (Windsurf, Copilot, etc.)
+- **Generator improvements** — Better prompts, more categories, richer output
+- **Bug fixes** — Open an issue first if you're unsure
 
 ### Adding a New Generator
 
-1. Create a new file in `src/generators/<tool-name>.js`
+1. Create `src/generators/<tool-name>.js`
 2. Export a `generate<ToolName>(context)` async function that returns a prompt string
 3. Import and wire it up in `src/commands/init.js`
 
-The `context` object passed to every generator contains:
+The `context` object passed to every generator:
 
 ```js
 {
   isFresh: Boolean,        // true if project has no existing files
-  projectAbout: String,    // user-provided project description (may be empty)
+  projectAbout: String,    // user-provided description (may be empty)
   projectStructure: String // scanned directory tree (existing projects only)
 }
+```
+
+---
+
+## 🛠️ Development
+
+```bash
+git clone https://github.com/isonnymichael/bedrock.git
+cd bedrock
+npm install
+
+# Test locally (direct execution — for development only)
+node bin/bedrock.cjs init --tool claude --about "my project"
 ```
 
 ---
@@ -355,3 +344,10 @@ The `context` object passed to every generator contains:
 ## 📄 License
 
 GPL-3.0 © Sonny Michael
+
+---
+
+<p align="center">
+  If Bedrock saved you time, consider giving it a ⭐ — it helps others find it.<br>
+  Want to support ongoing development? <a href="https://github.com/sponsors/isonnymichael">Sponsor on GitHub ♥</a>
+</p>
